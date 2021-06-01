@@ -1,25 +1,24 @@
-const mysql = require('mysql2/promise');
+const { ObjectId } = require('mongodb');
+const getConnection = require('./mongodbConnection');
 
-const connection = mysql.createPool({
-    host: 'localhost',
-    user: 'albertassi',
-    password: 'rlda88fm',
-    database: 'live_lecture_21_1', //nome do banco de dados
-    port: '3306',
-});
+const getAll = async () => getConnection().then((db) => db.collection('characters').find({}).toArray());
 
-const getAll = async () => connection.execute('SELECT * FROM characters').then(([results]) => results);
+const getById = async (id) => getConnection().then((db) => 
+ObjectId.isValid(id) ? db.collection('characters').findOne({_id: ObjectId(id)}) : null);
 
-const getById = async (id) => connection.execute('SELECT * FROM characters WHERE id = ?', [id])
-.then(([[character]]) => character || null);
+const add = async (name, cartoon) => getConnection().then((db) => db.collection('characters')
+.insertOne({ name, cartoon }).then((result) => ({ _id: result.insertedId, name, cartoon })));
 
-const add = async (name, cartoon) => connection.execute('INSERT INTO characters (name, cartoon) VALUES (?, ?)',
-[name, cartoon]).then(([result]) => ({id: result.insertId, name, cartoon}));
+const update = async (id, name, cartoon) => {
+    if (!ObjectId.isValid(id)) return;
+    await getConnection().then((db) => db.collection('characters')
+    .updateOne({ id: ObjectId(id) }, { $set: { name, cartoon } }));
+};
 
-const update = async (id, name, cartoon) => await connection.execute('UPDATE live_lecture_21_1.characters SET name=?, cartoon=? WHERE id=?',
-[name, cartoon, id]);
-
-const exclude = async (id) => connection.execute('DELETE FROM live_lecture_21_1.characters WHERE id=?', [id]);
+const exclude = async (id) => {
+    if (!ObjectId.isValid(id)) return null;
+    getConnection().then((db) => db.collection('characters').deleteOne({ _id: ObjectId(id) }));
+};
 
 module.exports = {
     getAll,
