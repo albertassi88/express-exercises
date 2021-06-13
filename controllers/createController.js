@@ -1,6 +1,6 @@
-const model = require('../models/user');
+const model = require('../models/userModel');
 
-const createUser = async (req, res) => {
+const create = async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -16,4 +16,4 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+module.exports = create;

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const model = require('../../models/user');
+const model = require('../../models/userModel');
 
 /* Mesma chave privada que usamos para criptografar o token, agora, vamos usá-la para descriptografá-lo.
    Numa aplicação real, essa chave jamais ficaria hardcoded no código assim,  e muitos menos de forma duplicada, 
