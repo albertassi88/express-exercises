@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const model = require('../models/user');
+const model = require('../../models/user');
 
-/* Mesma chave privada que usamos para criptografar o token, sgora, vamos usá-la para descriptografá-lo.
+/* Mesma chave privada que usamos para criptografar o token, agora, vamos usá-la para descriptografá-lo.
    Numa aplicação real, essa chave jamais ficaria hardcoded no código assim,  e muitos menos de forma duplicada, 
    mas aqui só estamos interessados em ilustrar seu uso ;) */
 const segredo = 'seusecretdetoken';
@@ -31,7 +31,7 @@ try {
   /* Caso o token esteja expirado, a própria biblioteca irá retornar um erro,
      por isso não é necessário fazer validação do tempo.
      Caso esteja tudo certo, nós então buscamos o usuário na base para obter seus dados atualizados */
-  const user = await model.findUser(decoded.data.username);
+  const user = await model.getAll(decoded.data.username);
 
   if (!user) { //Não existe um usuário na nossa base com o id informado no token.
     return res.status(401).json({ message: 'Erro ao procurar usuário do token.' });

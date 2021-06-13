@@ -1,11 +1,13 @@
 const connect = require('./connection');
 
-const registerUser = async (username, password) =>
-  connect().then((db) =>
-    db.collection('users').insertOne({ username, password })
-  ).then(result => result.ops[0].username );
-
-const findUser = async (username) =>
+const getAll = async (username) =>
   connect().then((db) => db.collection('users').findOne({ username }));
 
-module.exports = { registerUser, findUser };
+const create = async (username, password) =>
+  connect().then((db) => db.collection('users').insertOne({ username, password }))
+    .then(result => result.ops[0].username );
+
+module.exports = { 
+  getAll, 
+  create, 
+};

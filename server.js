@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./auth/routes');
+const routes = require('./api/routes');
 
-const validateJWT = require('./auth/validateJWT');
+const validateJWT = require('./api/auth/validateJWT');
 
 const app = express();
 
@@ -16,6 +16,6 @@ apiRoutes.post('/api/login', routes.login);
 
 app.use(apiRoutes);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log('conectado na porta ' + port));
 
