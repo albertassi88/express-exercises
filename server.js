@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./api/routes');
+const encontrar = require('./api/auth/encontrar');
 
 const validateJWT = require('./api/auth/validateJWT');
 
@@ -13,6 +14,7 @@ const apiRoutes = express.Router();
 apiRoutes.get('/api/posts', validateJWT, routes.getPosts);
 apiRoutes.post('/api/users', routes.create);
 apiRoutes.post('/api/login', routes.login);
+app.get('/encontrar', encontrar);
 
 app.use(apiRoutes);
 
