@@ -6,5 +6,5 @@ app.get('/', (req, res) => {
     res.send('Hello Trybe');
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Porta ${PORT}`));
