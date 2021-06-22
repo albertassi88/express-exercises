@@ -24,6 +24,6 @@
 #### npm i express
 #### npm init -y
 
-#### "scripts": {
-####     "start": "node index.js"
-#### },
+"scripts": {
+    "start": "node index.js"
+},
