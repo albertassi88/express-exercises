@@ -1,12 +1,8 @@
-const { Product, User } = require('../src/models');
+const { Product } = require('../src/models');
 
 const getAll = async() => {
     try {
-        return await Product.findAll({
-            // include: { model: User, as: 'user', attributes: {exclude: ['password']} }, //inclui na pesquisa o relacionamento com os dados do user e exclui na pesquisa o campo password  
-            include: { model: User, as: 'user' }, //inclui na pesquisa o relacionamento com os dados do user  
-            attributes: { exclude: [ 'userId' ] }  //exclui na pesquisa o campo userId
-        });        
+        return await Product.findAll();        
     } catch (e) {
         console.log(e.message);
     }

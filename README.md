@@ -14,14 +14,9 @@
 
 ## Definindo as associações Sequelize
 
-## A.hasOne(B); // A HasOne B
+## A.hasMany(B); // A hasMany B
 
-## A é chamado de modelo de origem e B é chamado de modelo de destino. Essa terminologia é importante.
 
-## A A.hasOne(B)associação significa que existe um relacionamento Um para Um entre Ae B, com a chave estrangeira sendo definida no modelo de destino (B).
-
-## Queremos estabelecer uma relação Um-a-Um entre Product e User. Sabemos que em um banco de dados relacional, isso será feito estabelecendo uma chave estrangeira em uma das tabelas.Em qual tabela vamos colocar a chave estrangeira? Para descobrir podemos fazer a seguinte pergunta:
-## Um Product pode existir sem um User? Um User pode existir sem um Product? As respostas a essas perguntas ajudam a descobrir onde queremos que a coluna de chave estrangeira esteja.
 
 
 
