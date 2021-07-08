@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket IO</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 13px Helvetica, Arial;
+        }
+
+        form {
+            background: black;
+            padding: 3px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        form input {
+            border: 0;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script> 
+</head>
+<body>
+    <ul id="mensagens">
+    </ul>
+    <form action="">
+        <input id="mensagemInput" autocomplete="off"/>
+        <button>Send</button>
+    </form> 
+    
+    <script>
+        const socket = io(); //acessar o socket que passamos no script a cima.
+        const form = document.querySelector('form');
+        const inputMessage = document.querySelector('#mensagemInput');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            socket.emit('mensagem', inputMessage.value); //emitindo o evento 'mensagem' para o server.js (backend)
+            inputMessage.value = "";
+            return false;
+        }) 
+        
+        const createMessage = (message) => {
+            const messagesUl = document.querySelector('#mensagens');
+            const li = document.createElement('li');
+            li.innerText = message;
+            messagesUl.appendChild(li);
+        }
+
+        socket.on('message', (message) => createMessage(message));  //aguardando o evento 'message' do server.js
+    
+        socket.on('serverMessage', ({message}) => createMessage(message));
+    </script>   
+</body>
+</html>
