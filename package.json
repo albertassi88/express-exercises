@@ -1,0 +1,20 @@
+{
+  "name": "express-exercises",
+  "version": "1.0.0",
+  "description": "### npm i socket.io express body-parser express-rescue mongodb nodemon pm2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertassi88/express-exercises.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertassi88/express-exercises/issues"
+  },
+  "homepage": "https://github.com/albertassi88/express-exercises#readme"
+}
